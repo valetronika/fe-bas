@@ -12,7 +12,7 @@ for (let i = 0; i < 10; i++) {
     const button = document.createElement("button");
     const div = document.createElement("div");
     paragraph.innerHTML = "Котики";
-    bodyElement.before(div);
+    bodyElement.prepend(div);
     bodyElement.before(button);
     bodyElement.before(paragraph);
     arrElements.push(div);
@@ -63,7 +63,7 @@ function toggleMask() {
 // должны быть стили, которые меняют цвет текста и цвет заднего
 // фона местами.
 const task2 = document.createElement("div");
-bodyElement.after(task2);
+bodyElement.append(task2);
 task2.classList.add("task2_div");
 task2.style.display = "flex";
 for (let i = 0; i < 10; i++) {
@@ -88,7 +88,6 @@ let blocksTask2 = document.querySelectorAll(".active");
 function colorBlocks() {
     this.style.backgroundColor = "#E8AFC6";
     this.style.color = "#580325";
-    
 }
 function colorBlocksInver() {
     this.style.backgroundColor = "#580325";
@@ -100,7 +99,7 @@ function action() {
         colorBlocksInver.call(this);
     } else {
         colorBlocks.call(this);
-// Доработать прошлый скрипт таким образом, чтобы при повторном нажатии класс active удалялся.
+        // Доработать прошлый скрипт таким образом, чтобы при повторном нажатии класс active удалялся.
         this.classList.toggle("active");
     }
 }
@@ -108,37 +107,58 @@ for (let i = 0; i < 10; i++) {
     blocksTask2[i].addEventListener("click", action);
 }
 
-
-
-
-// В JS объявлен массив с ссылками на картинки. На основе этого массива 
-// формируется множество маленьких картинок в верхней части интерфейса. При 
-// нажатии на одну из картинок забирается ссылка на эту картинку и в нижней 
-// части интерфейса отображается в большем размере. Так, пользователь, нажимая 
-// на маленькие картинки видит их отображение 
+// В JS объявлен массив с ссылками на картинки. На основе этого массива
+// формируется множество маленьких картинок в верхней части интерфейса. При
+// нажатии на одну из картинок забирается ссылка на эту картинку и в нижней
+// части интерфейса отображается в большем размере. Так, пользователь, нажимая
+// на маленькие картинки видит их отображение
 // в большем размере.
 
-let divHeader =document.createElement('div');
-divHeader.classList.add('divHeader')
-bodyElement.prepend(divHeader);
-divHeader.style.backgroundColor='red';
+const arrImg = [
+    "https://images.pexels.com/photos/14918365/pexels-photo-14918365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/3826669/pexels-photo-3826669.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/4672712/pexels-photo-4672712.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/5713390/pexels-photo-5713390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/13060249/pexels-photo-13060249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+];
+//создаю блок сверху
+let divHeader = document.createElement("div");
+document.body.prepend(divHeader);
+divHeader.classList.add("divHeader");
+divHeader.style.backgroundColor = "red";
+divHeader.style.height = "100px";
+divHeader.style.display = "flex";
+divHeader.style.justifyContent = "space-evenly";
+// divHeader
 
-let divFooter =document.createElement('div');
-divFooter.classList.add('divFooter')
-bodyElement.after(divFooter);
-divFooter.style.backgroundColor='red';
-
-
-
-
-
-
+for (let i = 0; i < arrImg.length; i++) {
+    let img_head = document.createElement("img");
+    img_head.setAttribute("src", arrImg[i]);
+    divHeader.prepend(img_head);
+}
+//класс по клику+большие картинки
+const img = document.querySelectorAll("img");
+for (let i = 0; i < img.length; i++) {
+    img[i].addEventListener(
+        "click",
+        (funk_img_big = () => {
+            img[i].classList.toggle("big__img");
+            if (img[i].classList.contains("big__img")) {
+                img[i].style.position='absolute';
+                img[i].style.top = '20%';
+                img[i].style.right = '20%'; 
+            } else {
+                img[i].style.position='';
+                img[i].style.top = '';
+                img[i].style.right = ''; 
+            }
+        })
+    );
+}
 
 
 
 // LEVEL 2
-
-
 
 // Есть массив из объектов. Каждый объект имеет свойства en и ru. В свойстве en написано слово на английском, а в свойстве ru на русском. Необходимо реализовать карточки, при нажатии на которые слова с русского меняются на английский и обратно.
 // Подсказка. В каждой карточке должно быть два параграфа. В одном написано на русском, а во втором на английском и при нажатии на карточку один параграф получает класс с display none а второй с display block.
