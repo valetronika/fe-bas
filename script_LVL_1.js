@@ -66,6 +66,8 @@ const task2 = document.createElement("div");
 bodyElement.append(task2);
 task2.classList.add("task2_div");
 task2.style.display = "flex";
+const task2_div = document.querySelector(".task2_div");
+task2_div.style.justifyContent = "center";
 for (let i = 0; i < 10; i++) {
     const divInTask2 = document.createElement("div");
     task2.append(divInTask2);
@@ -125,10 +127,12 @@ const arrImg = [
 let divHeader = document.createElement("div");
 document.body.prepend(divHeader);
 divHeader.classList.add("divHeader");
-divHeader.style.backgroundColor = "red";
+divHeader.style.backgroundColor = "#6562627e";
 divHeader.style.height = "100px";
+divHeader.style.width = "80%";
 divHeader.style.display = "flex";
 divHeader.style.justifyContent = "space-evenly";
+divHeader.style.margin = "0 auto";
 // divHeader
 
 for (let i = 0; i < arrImg.length; i++) {
@@ -144,19 +148,17 @@ for (let i = 0; i < img.length; i++) {
         (funk_img_big = () => {
             img[i].classList.toggle("big__img");
             if (img[i].classList.contains("big__img")) {
-                img[i].style.position='absolute';
-                img[i].style.top = '20%';
-                img[i].style.right = '20%'; 
+                img[i].style.position = "absolute";
+                img[i].style.bottom = "0";
+                img[i].style.right = "40%";
             } else {
-                img[i].style.position='';
-                img[i].style.top = '';
-                img[i].style.right = ''; 
+                img[i].style.position = "";
+                img[i].style.top = "";
+                img[i].style.right = "";
             }
         })
     );
 }
-
-
 
 // LEVEL 2
 
